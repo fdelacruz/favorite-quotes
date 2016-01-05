@@ -1,17 +1,9 @@
 import React from 'react';
 import {cushion, button, input} from '../../../utilities/styleGuide';
+import createId from '../../../utilities/createId';
 
 class AddQuote extends React.Component {
   
-  createId(uniqueNumber, description) {
-    const shortKebabDescription = description
-      .toLowerCase()
-      .split(' ')
-      .slice(0, 2)
-      .join('-');
-    return `${uniqueNumber}-${shortKebabDescription}`;
-  }
-
   handleSubmit() {
     const textNode = this.refs.text;
     const text = textNode.value.trim();
@@ -20,7 +12,7 @@ class AddQuote extends React.Component {
     const payload = {
       text,
       author,
-      id: this.createId(Date.now(), text),
+      id: createId(Date.now(), text),
       likeCount: 0
     };
     this.props.addQuoteById(payload);
